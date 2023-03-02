@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class QueryFeedListResponse {
 
+    private final Long id;
     private final String title;
     private final String content;
 }
