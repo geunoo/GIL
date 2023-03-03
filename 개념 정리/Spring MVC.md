@@ -35,8 +35,8 @@ Model의 데이터를 **클라이언트(사용자)에게 보여주는 역할**�
 클라이언트의 요청을 받아 Model 데이터를 가공하여 View에 전달해준다.
 
 ## 동작방식
+![1](https://user-images.githubusercontent.com/103028187/222638979-92699215-a72f-46d8-9755-5a5fc834b427.png)
 
-![Untitled](Spring%20MVC%205f63e86e55e74f84bf293af8a12dbee0/Untitled.png)
 
 **Spring MVC의 중심에는 Dispatcher Servlet**이 있다.
 
