@@ -4,9 +4,11 @@ import com.example.crud.controller.dto.request.CreateFeedRequest
 import com.example.crud.controller.dto.request.UpdateFeedRequest
 import com.example.crud.controller.dto.response.QueryFeedsResponse
 import com.example.crud.service.CreateFeedService
+import com.example.crud.service.DeleteFeedService
 import com.example.crud.service.QueryFeedsService
 import com.example.crud.service.UpdateFeedService
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -23,6 +25,7 @@ class FeedController(
         private val createFeedService: CreateFeedService,
         private val queryFeedsService: QueryFeedsService,
         private val updateFeedService: UpdateFeedService,
+        private val deleteFeedService: DeleteFeedService,
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -40,5 +43,11 @@ class FeedController(
     @PutMapping("/{feed-id}")
     fun updateFeed(@PathVariable("feed-id") id: Long, @RequestBody @Valid request: UpdateFeedRequest) {
         updateFeedService.execute(id, request)
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{feed-id}")
+    fun deleteFeed(@PathVariable("feed-id") feedId: Long) {
+        deleteFeedService.execute(feedId)
     }
 }
