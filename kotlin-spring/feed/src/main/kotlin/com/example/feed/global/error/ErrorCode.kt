@@ -5,5 +5,7 @@ enum class ErrorCode(
         override val message: String
 ): ErrorResponse {
 
+    USER_NOT_FOUND(404, "User Not Found"),
+
     INTERNAL_SERVER_ERROR(500, "Internal Server Error")
 }
