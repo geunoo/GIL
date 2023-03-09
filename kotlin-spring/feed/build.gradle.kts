@@ -35,6 +35,7 @@ dependencies {
 
     //web
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-security")
 
     //time-based UUID generator
     implementation("com.fasterxml.uuid:java-uuid-generator:3.1.4")
@@ -51,6 +52,10 @@ dependencies {
     //querydsl
     implementation("com.querydsl:querydsl-jpa:5.0.0")
     kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
+
+    //jwt
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+
 }
 
 tasks.withType<KotlinCompile> {
