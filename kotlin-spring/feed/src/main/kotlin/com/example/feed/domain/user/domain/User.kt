@@ -2,11 +2,13 @@ package com.example.feed.domain.user.domain
 
 import com.example.feed.domain.user.domain.enums.Sex
 import com.example.feed.global.entity.BaseUUIDEntity
-import java.util.UUID
-import javax.persistence.*
+import java.util.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 
 @Entity
-@Table(name = "user_tbl")
 class User(
 
         override val id: UUID,
@@ -14,8 +16,8 @@ class User(
         @Column(columnDefinition = "VARCHAR(30)", nullable = false, unique = true)
         val accountId: String,
 
-        @Column(columnDefinition = "VARCHAR", nullable = false)
-        val password: String,
+        @Column(columnDefinition = "VARCHAR(100)", nullable = false)
+        private val password: String,
 
         @Column(columnDefinition = "VARCHAR(20)", nullable = false)
         val name: String,
@@ -27,4 +29,4 @@ class User(
         @Column(columnDefinition = "VARCHAR(6)", nullable = false)
         val sex: Sex,
 
-): BaseUUIDEntity()
+        ): BaseUUIDEntity()
