@@ -1,7 +1,7 @@
 package com.example.feed.domain.user.domain.repository
 
 import com.example.feed.domain.user.domain.RefreshToken
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.CrudRepository
 
-interface RefreshTokenJpaRepository : JpaRepository<RefreshToken, String> {
+interface RefreshTokenJpaRepository : CrudRepository<RefreshToken, String> {
 }

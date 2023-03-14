@@ -6,7 +6,12 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
+  redis:
+    port: ${REDIS_PORT}
+    host: ${REDIS_HOST}
+
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
     properties:
