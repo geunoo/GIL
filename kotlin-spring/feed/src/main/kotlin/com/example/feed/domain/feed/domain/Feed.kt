@@ -12,16 +12,20 @@ import javax.persistence.ManyToOne
 @Entity
 class Feed(
 
-        override val id: UUID,
-
-        @Column(columnDefinition = "VARCHAR(30)", nullable = false)
-        val title: String,
-
-        @Column(columnDefinition = "VARCHAR(1000)", nullable = false)
-        val content: String,
+        title: String,
+        content: String,
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "user_id", nullable = false)
         val user: User,
 
-        ): BaseEntity()
+): BaseEntity() {
+
+        @Column(columnDefinition = "VARCHAR(30)", nullable = false)
+        var title: String = title
+                protected set
+
+        @Column(columnDefinition = "VARCHAR(1000)", nullable = false)
+        var content: String = content
+                protected set
+}
