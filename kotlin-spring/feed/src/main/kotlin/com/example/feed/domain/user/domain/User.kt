@@ -2,7 +2,6 @@ package com.example.feed.domain.user.domain
 
 import com.example.feed.domain.user.domain.enums.Sex
 import com.example.feed.global.entity.BaseUUIDEntity
-import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -27,4 +26,4 @@ class User(
         @Column(columnDefinition = "VARCHAR(6)", nullable = false)
         val sex: Sex,
 
-        ): BaseUUIDEntity()
+): BaseUUIDEntity()

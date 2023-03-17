@@ -4,10 +4,12 @@ import com.example.feed.domain.user.domain.User
 import com.example.feed.global.entity.BaseEntity
 import java.util.UUID
 import javax.persistence.Column
+import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 
+@Entity
 class Feed(
 
         override val id: UUID,
@@ -22,4 +24,4 @@ class Feed(
         @JoinColumn(name = "user_id", nullable = false)
         val user: User,
 
-): BaseEntity()
+        ): BaseEntity()
