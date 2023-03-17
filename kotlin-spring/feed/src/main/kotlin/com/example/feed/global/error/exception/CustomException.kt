@@ -1,6 +1,6 @@
 package com.example.feed.global.error.exception
 
-import com.example.feed.global.error.ErrorResponse
+import com.example.feed.global.error.response.ErrorResponse
 
 abstract class CustomException(
         private val error: ErrorResponse
