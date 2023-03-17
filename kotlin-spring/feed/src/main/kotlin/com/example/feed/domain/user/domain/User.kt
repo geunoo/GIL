@@ -11,8 +11,6 @@ import javax.persistence.Enumerated
 @Entity
 class User(
 
-        override val id: UUID,
-
         @Column(columnDefinition = "VARCHAR(30)", nullable = false, unique = true)
         val accountId: String,
 
