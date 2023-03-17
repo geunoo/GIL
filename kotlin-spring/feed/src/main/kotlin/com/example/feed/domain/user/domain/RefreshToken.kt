@@ -12,8 +12,13 @@ class RefreshToken(
         val accountId: String,
 
         @Indexed
-        val token: String,
+        var token: String,
 
         @TimeToLive
-        val ttl: Long
-)
+        var ttl: Long
+) {
+        fun update(token: String, ttl: Long) {
+                this.token = token
+                this.ttl = ttl
+        }
+}
