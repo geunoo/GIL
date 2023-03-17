@@ -16,4 +16,10 @@ class UserRepository(
 
     fun queryUserByAccountId(accountId: String): User =
             userJpaRepository.findByAccountId(accountId) ?: throw UserNotFoundException
+
+    fun existsUserByAccountId(accountId: String): Boolean =
+            userJpaRepository.existsByAccountId(accountId)
+
+    fun saveUser(user: User): User =
+            userJpaRepository.save(user)
 }
