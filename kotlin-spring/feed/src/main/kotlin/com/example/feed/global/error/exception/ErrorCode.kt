@@ -9,6 +9,7 @@ enum class ErrorCode(
 
     EXPIRED_TOKEN(401,"Token Expired" ),
     INVALID_TOKEN(401,"Invalid Token"),
+    INVALID_PASSWORD(401, "Invalid Password"),
 
     USER_NOT_FOUND(404, "User Not Found"),
 
