@@ -50,8 +50,8 @@ class JwtTokenProvider(
     }
 
     fun resolveToken(httpServletRequest: HttpServletRequest): String? {
-        val token: String = httpServletRequest.getHeader(jwtProperties.header)
-        if (token.startsWith(jwtProperties.prefix)) {
+        val token: String? = httpServletRequest.getHeader(jwtProperties.header)
+        if (token != null && token.startsWith(jwtProperties.prefix)) {
             return token.replace(jwtProperties.prefix, "")
         }
         return null;
