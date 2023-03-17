@@ -4,6 +4,7 @@ import com.example.feed.global.security.jwt.JwtTokenProvider
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -29,6 +30,13 @@ class SecurityConfig(
                 .and()
 
                 .authorizeRequests()
+
+                //user
+                .antMatchers(HttpMethod.POST, "/users/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/login").permitAll()
+                .antMatchers(HttpMethod.PUT, "/users/reissue").permitAll()
+
+                //feed
                 .anyRequest().permitAll()
                 .and()
 
