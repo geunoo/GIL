@@ -1,6 +1,6 @@
 package com.example.feed.global.error.exception
 
-import com.example.feed.global.error.ErrorResponse
+import com.example.feed.global.error.response.ErrorResponse
 
 enum class ErrorCode(
         override val status: Int,
@@ -11,6 +11,8 @@ enum class ErrorCode(
     INVALID_TOKEN(401,"Invalid Token"),
 
     USER_NOT_FOUND(404, "User Not Found"),
+
+    USER_ALREADY_EXISTS(409, "User Already Exists"),
 
     INTERNAL_SERVER_ERROR(500, "Internal Server Error")
 }
