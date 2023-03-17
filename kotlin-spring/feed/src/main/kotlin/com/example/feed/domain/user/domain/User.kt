@@ -14,7 +14,7 @@ class User(
         val accountId: String,
 
         @Column(columnDefinition = "VARCHAR(100)", nullable = false)
-        private val password: String,
+        val password: String,
 
         @Column(columnDefinition = "VARCHAR(20)", nullable = false)
         val name: String,
