@@ -37,6 +37,7 @@ class SecurityConfig(
                 .antMatchers(HttpMethod.PUT, "/users/reissue").permitAll()
 
                 //feed
+                .antMatchers(HttpMethod.POST, "/feeds").authenticated()
                 .anyRequest().permitAll()
                 .and()
 
