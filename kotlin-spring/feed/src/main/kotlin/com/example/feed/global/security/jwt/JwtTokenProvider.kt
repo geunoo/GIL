@@ -13,7 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
-import java.util.*
+import java.util.Date
 import javax.servlet.http.HttpServletRequest
 
 @Component
@@ -41,7 +41,8 @@ class JwtTokenProvider(
     fun getAuthentication(token: String): Authentication {
         val claims: Claims = getClaims(token)
 
-        if (claims["type", String.Companion::class.java]?.equals("access") == true) {
+        if (!claims.get("type", String::class.java).equals("access")) {
+            println(claims.get("type"))
             throw InvalidTokenException
         }
 
