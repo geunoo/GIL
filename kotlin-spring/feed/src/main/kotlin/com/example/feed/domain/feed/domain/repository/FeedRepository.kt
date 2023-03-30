@@ -6,7 +6,9 @@ import com.example.feed.domain.feed.presentation.dto.response.QQueryFeedsRespons
 import com.example.feed.domain.feed.presentation.dto.response.QueryFeedsResponse
 import com.example.feed.domain.user.domain.QUser.user
 import com.querydsl.jpa.impl.JPAQueryFactory
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
+import java.util.UUID
 
 @Repository
 class FeedRepository(
@@ -21,6 +23,7 @@ class FeedRepository(
         jpaQueryFactory
             .select(
                 QQueryFeedsResponse(
+                    feed.id,
                     feed.title,
                     feed.content,
                     user.name,
@@ -32,4 +35,6 @@ class FeedRepository(
             .orderBy(feed.createdAt.desc())
             .fetch()
 
+    fun queryFeedById(id: UUID) =
+        feedJpaRepository.findByIdOrNull(id)
 }
