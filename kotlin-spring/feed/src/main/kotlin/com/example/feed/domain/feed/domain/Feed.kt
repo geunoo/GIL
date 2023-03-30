@@ -27,4 +27,9 @@ class Feed(
         @Column(columnDefinition = "VARCHAR(1000)", nullable = false)
         var content: String = content
                 protected set
+
+        fun update(title: String, content: String) {
+                this.title = title
+                this.content = content
+        }
 }
