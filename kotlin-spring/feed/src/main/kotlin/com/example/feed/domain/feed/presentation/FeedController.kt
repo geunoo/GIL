@@ -37,11 +37,13 @@ class FeedController(
     @GetMapping
     fun get(): List<QueryFeedsResponse> = queryFeedsService.execute()
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{feed-id}")
     fun update(@PathVariable("feed-id") feedId: UUID, @RequestBody @Valid request: UpdateFeedRequest) {
         updateFeedService.execute(feedId, request)
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{feed-id}")
     fun delete(@PathVariable("feed-id") feedId: UUID) {
         deleteFeedService.execute(feedId)
