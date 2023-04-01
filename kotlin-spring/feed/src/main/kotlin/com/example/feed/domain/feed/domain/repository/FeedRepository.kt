@@ -37,4 +37,8 @@ class FeedRepository(
 
     fun queryFeedById(id: UUID) =
         feedJpaRepository.findByIdOrNull(id)
+
+    fun deleteFeed(feed: Feed) {
+        feedJpaRepository.delete(feed)
+    }
 }
