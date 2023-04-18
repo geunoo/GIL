@@ -31,7 +31,7 @@ public class FeedController {
     }
 
     @GetMapping
-    public List<QueryFeedListResponse> queryFeedList() {
+    public QueryFeedListResponse queryFeedList() {
         return queryFeedListService.execute();
     }
 
