@@ -1,0 +1,5 @@
+rootProject.name = 'hexagonal-feed'
+include("hexagonal-feed-domain")
+include("hexagonal-feed-application")
+include("hexagonal-feed-infrastructure")
+include("hexagonal-feed-presentation")

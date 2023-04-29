@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.11'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // module
+    implementation(project(":hexagonal-feed-application"))
+    implementation(project(":hexagonal-feed-domain"))
+    implementation(project(":hexagonal-feed-presentation"))
+
+    //persistence
+    runtimeOnly 'mysql:mysql-connector-java:8.0.23'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'com.fasterxml.uuid:java-uuid-generator:3.1.4'
+
+    // time uuid
+    implementation 'com.fasterxml.uuid:java-uuid-generator:3.1.4'
+}
+
+tasks.register("prepareKotlinBuildScriptModel"){}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
