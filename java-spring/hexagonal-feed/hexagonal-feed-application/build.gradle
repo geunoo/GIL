@@ -7,9 +7,12 @@ plugins {
 dependencies {
 
     // module
-    implementation(project(":hexagonal-feed-domain"))
-jar {
-    enabled = true
+    implementation project (":hexagonal-feed-domain")
+
 }
 
 tasks.register("prepareKotlinBuildScriptModel"){}
+
+jar {
+    enabled = true
+}
