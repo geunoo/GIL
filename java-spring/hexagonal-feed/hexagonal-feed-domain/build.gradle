@@ -2,3 +2,7 @@ plugins {
 }
 
 tasks.register("prepareKotlinBuildScriptModel"){}
+
+jar {
+    enabled = true
+}

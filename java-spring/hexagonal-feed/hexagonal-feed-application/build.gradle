@@ -8,6 +8,8 @@ dependencies {
 
     // module
     implementation(project(":hexagonal-feed-domain"))
+jar {
+    enabled = true
 }
 
 tasks.register("prepareKotlinBuildScriptModel"){}
