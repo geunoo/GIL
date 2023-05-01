@@ -6,6 +6,9 @@ plugins {
 
 dependencies {
 
+    // transactional
+    implementation 'org.springframework:spring-tx:6.0.8'
+
     // module
     implementation project (":hexagonal-feed-domain")
 
