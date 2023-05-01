@@ -15,9 +15,9 @@ repositories {
 dependencies {
 
     // module
-    implementation(project(":hexagonal-feed-application"))
-    implementation(project(":hexagonal-feed-domain"))
-    implementation(project(":hexagonal-feed-presentation"))
+    implementation project(":hexagonal-feed-application")
+    implementation project(":hexagonal-feed-domain")
+    implementation project(":hexagonal-feed-presentation")
 
     //persistence
     runtimeOnly 'mysql:mysql-connector-java:8.0.23'
@@ -30,6 +30,13 @@ dependencies {
 
     // web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // querydsl
+    implementation 'com.querydsl:querydsl-jpa'
+    annotationProcessor(
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api",
+            "com.querydsl:querydsl-apt:5.0.0:jpa")
 }
 
 tasks.register("prepareKotlinBuildScriptModel"){}
