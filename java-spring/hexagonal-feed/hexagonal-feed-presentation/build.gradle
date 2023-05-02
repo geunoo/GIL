@@ -22,3 +22,7 @@ tasks.register("prepareKotlinBuildScriptModel"){}
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar {
+	enabled = false
+}

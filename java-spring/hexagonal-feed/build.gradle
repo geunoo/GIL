@@ -38,7 +38,3 @@ subprojects {
 springBoot {
     mainClass = 'com.example.hexagonalfeed.HexagonalFeedApplication'
 }
-
-tasks.named('test') {
-    useJUnitPlatform()
-}
