@@ -8,6 +8,10 @@ import com.example.hexagonalfeed.persistence.feed.repository.FeedJpaRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
+import static com.example.hexagonalfeed.persistence.feed.entity.QFeedJpaEntity.feedJpaEntity;
+
 @RequiredArgsConstructor
 @Adapter
 public class FeedPersistenceAdapter implements FeedSpi {
@@ -30,5 +34,15 @@ public class FeedPersistenceAdapter implements FeedSpi {
         feedJpaRepository.delete(
                 feedMapper.domainToEntity(feed)
         );
+    }
+
+    @Override
+    public List<Feed> queryFeeds() {
+        return jpaQueryFactory
+                .selectFrom(feedJpaEntity)
+                .orderBy(feedJpaEntity.createdAt.desc())
+                .fetch().stream()
+                .map(feedMapper::entityToDomain)
+                .toList();
     }
 }
