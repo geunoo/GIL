@@ -1,8 +1,8 @@
 package com.example.hexagonalfeed.domain.feed;
 
+import com.example.hexagonalfeed.domain.feed.api.CreateFeedApi;
 import com.example.hexagonalfeed.domain.feed.dto.request.DomainCreateFeedRequest;
 import com.example.hexagonalfeed.domain.feed.dto.request.WebCreateFeedRequest;
-import com.example.hexagonalfeed.domain.feed.usecase.CreateFeedUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +18,14 @@ import javax.validation.Valid;
 @RestController
 public class FeedWebAdapter {
 
-    private final CreateFeedUseCase createFeedUseCase;
+    private final CreateFeedApi createFeedApi;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void createFeed(
             @RequestBody @Valid WebCreateFeedRequest request
     ) {
-        createFeedUseCase.execute(
+        createFeedApi.execute(
                 DomainCreateFeedRequest.builder()
                         .title(request.getTitle())
                         .content(request.getContent())
