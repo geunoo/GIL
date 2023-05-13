@@ -40,6 +40,10 @@ public class LoggerAop {
 
     @AfterReturning(value = "cnt()", returning = "returnObj")
     public void afterLog(JoinPoint joinPoint, Object returnObj) {
+        if (returnObj == null) {
+            return;
+        }
+
         log.info("==================return==================");
         log.info("parameter type :: " + returnObj.getClass().getSimpleName());
         log.info("parameter value :: " + returnObj);
