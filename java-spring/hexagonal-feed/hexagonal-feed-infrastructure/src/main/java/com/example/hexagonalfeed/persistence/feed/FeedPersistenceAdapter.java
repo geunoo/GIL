@@ -2,6 +2,7 @@ package com.example.hexagonalfeed.persistence.feed;
 
 import com.example.hexagonalfeed.common.annotation.Adapter;
 import com.example.hexagonalfeed.domain.feed.domain.Feed;
+import com.example.hexagonalfeed.domain.feed.exception.FeedNotFoundException;
 import com.example.hexagonalfeed.domain.feed.spi.FeedSpi;
 import com.example.hexagonalfeed.persistence.feed.mapper.FeedMapper;
 import com.example.hexagonalfeed.persistence.feed.repository.FeedJpaRepository;
@@ -9,6 +10,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.example.hexagonalfeed.persistence.feed.entity.QFeedJpaEntity.feedJpaEntity;
 
@@ -44,5 +46,13 @@ public class FeedPersistenceAdapter implements FeedSpi {
                 .fetch().stream()
                 .map(feedMapper::entityToDomain)
                 .toList();
+    }
+
+    @Override
+    public Feed queryFeedById(UUID feedId) {
+        return feedMapper.entityToDomain(
+                feedJpaRepository.findById(feedId)
+                        .orElseThrow(() -> FeedNotFoundException.EXCEPTION)
+        );
     }
 }
