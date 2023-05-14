@@ -15,7 +15,8 @@ public class CreateFeedUseCase implements CreateFeedApi {
 
     @Override
     public void execute(DomainCreateFeedRequest request) {
-        feedCommandSpi.save(Feed.builder()
+        feedCommandSpi.save(
+                Feed.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
                 .build()
