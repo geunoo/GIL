@@ -7,7 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ErrorCode {
 
-    INTERNAL_SERVER_ERROR(500, "Internal Server Error");
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
+
+    FEED_NOT_FOUND(404, "Feed Not Found");
 
     private final Integer status;
     private final String message;
