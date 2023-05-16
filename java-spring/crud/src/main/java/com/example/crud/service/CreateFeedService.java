@@ -22,7 +22,7 @@ public class CreateFeedService {
                 .content(request.getContent())
                 .build();
 
-        eventPublisher.publishEvent(feed);
         feedRepository.save(feed);
+        eventPublisher.publishEvent(feed);
     }
 }
