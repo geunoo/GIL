@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserProducer {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, User> kafkaTemplate;
 
     public void sendMessage(User user) {
         System.out.println("send user" + user.toString());
@@ -18,6 +18,6 @@ public class UserProducer {
 //                .setHeader(KafkaHeaders.TOPIC, "user")
 //                .build();
 
-        kafkaTemplate.send("user", user.toString());
+        kafkaTemplate.send("user", user);
     }
 }
