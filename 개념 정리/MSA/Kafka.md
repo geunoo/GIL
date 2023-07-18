@@ -12,9 +12,7 @@ pub는 발행(Publish), sub는 구독(Subscribe)를 의미한다.
 
 기존의 end-to-end 통신 방식을 보자.
 
-![Untitled](/Users/gilgeunwoo/Desktop/Untitled.png)
-
-
+![Untitled](https://github.com/gilgeunwoo/GIL/assets/103028187/01880d2e-e639-405d-83cf-0ee781701734)
 
 user1, user2는 user3, user4에게 데이터를 주기 위해 직접적으로 통신하게 된다.
 
@@ -22,7 +20,8 @@ user1, user2는 user3, user4에게 데이터를 주기 위해 직접적으로 �
 
 이는 확장성이 떨어지게된다.
 
-![Untitled 1](/Users/gilgeunwoo/Desktop/Untitled 1.png)
+![Untitled 1](https://github.com/gilgeunwoo/GIL/assets/103028187/3f88d3db-4af5-43c1-bc73-0d77fe3bd62e)
+
 
 위와 같이 Pub-Sub 모델을 적용하게 된다면 
 user1, user2는 데이터를 받을 개체를 정하지 않고, 데이터를 큐에 발행하게 된다.
