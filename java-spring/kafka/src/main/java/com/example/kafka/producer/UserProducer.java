@@ -1,5 +1,6 @@
-package com.example.kafka;
+package com.example.kafka.producer;
 
+import com.example.kafka.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;

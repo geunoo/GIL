@@ -1,7 +1,7 @@
 package com.example.kafka.config;
 
-import com.example.kafka.User;
-import com.example.kafka.UserRequest;
+import com.example.kafka.domain.Feed;
+import com.example.kafka.domain.User;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +31,21 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, User> kafkaTemplate() {
+    public ProducerFactory<String, Feed> feedProducerFactory() {
+        Map<String, Object> configProperties = new HashMap<>();
+        configProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configProperties);
+    }
+
+    @Bean
+    public KafkaTemplate<String, User> userKafkaTemplate() {
         return new KafkaTemplate<>(userProducerFactory());
+    }
+
+    @Bean
+    public KafkaTemplate<String, Feed> feedKafkaTemplate() {
+        return new KafkaTemplate<>(feedProducerFactory());
     }
 }

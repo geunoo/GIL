@@ -1,4 +1,4 @@
-package com.example.kafka;
+package com.example.kafka.domain;
 
 import lombok.Builder;
 import lombok.Getter;
