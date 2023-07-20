@@ -41,13 +41,13 @@ public class KafkaConsumerConfig {
     private <T> DefaultKafkaConsumerFactory<String, T> createKafkaConsumerFactory(Class<T> type) {
         JsonDeserializer<T> deserializer = createJsonDeserializer(type);
         return new DefaultKafkaConsumerFactory<>(
-                createConsumerProps(),
+                getConsumerProps(),
                 new StringDeserializer(),
                 deserializer
         );
     }
 
-    private Map<String, Object> createConsumerProps() {
+    private Map<String, Object> getConsumerProps() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "foo");
@@ -56,8 +56,8 @@ public class KafkaConsumerConfig {
         return props;
     }
 
-    private <T> JsonDeserializer<T> createJsonDeserializer(Class<T> deserializedType) {
-        JsonDeserializer<T> deserializer = new JsonDeserializer<>(deserializedType);
+    private <T> JsonDeserializer<T> createJsonDeserializer(Class<T> type) {
+        JsonDeserializer<T> deserializer = new JsonDeserializer<>(type);
         deserializer.setRemoveTypeHeaders(false);
         deserializer.addTrustedPackages("*");
         deserializer.setUseTypeMapperForKey(true);
