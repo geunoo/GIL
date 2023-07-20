@@ -41,18 +41,18 @@ public class KafkaConsumerConfig {
     private <T> DefaultKafkaConsumerFactory<String, T> createKafkaConsumerFactory(Class<T> type) {
         JsonDeserializer<T> deserializer = createJsonDeserializer(type);
         return new DefaultKafkaConsumerFactory<>(
-                createConsumerProps(deserializer.getClass()),
+                createConsumerProps(),
                 new StringDeserializer(),
                 deserializer
         );
     }
 
-    private <T> Map<String, Object> createConsumerProps(Class<T> deserializerType) {
+    private <T> Map<String, Object> createConsumerProps() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "foo");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializerType);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         return props;
     }
 
