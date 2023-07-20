@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class FeedConsumer {
 
-
     @KafkaListener(topics = "feed", groupId = "bar", containerFactory = "feedContainerFactory")
     public void consume(Feed feed) {
         System.out.println(feed.toString());
