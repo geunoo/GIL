@@ -21,31 +21,23 @@ public class KafkaProducerConfig {
     @Value(value = "${kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    @Bean
-    public ProducerFactory<String, User> userProducerFactory() {
-        Map<String, Object> configProperties = new HashMap<>();
-        configProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        configProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return new DefaultKafkaProducerFactory<>(configProperties);
-    }
-
-    @Bean
-    public ProducerFactory<String, Feed> feedProducerFactory() {
-        Map<String, Object> configProperties = new HashMap<>();
-        configProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        configProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return new DefaultKafkaProducerFactory<>(configProperties);
-    }
 
     @Bean
     public KafkaTemplate<String, User> userKafkaTemplate() {
-        return new KafkaTemplate<>(userProducerFactory());
+        return new KafkaTemplate<>(createProducerFactory(User.class));
     }
 
     @Bean
     public KafkaTemplate<String, Feed> feedKafkaTemplate() {
-        return new KafkaTemplate<>(feedProducerFactory());
+        return new KafkaTemplate<>(createProducerFactory(Feed.class));
     }
+
+    private <T> DefaultKafkaProducerFactory<String, T> createProducerFactory(Class<T> type) {
+        Map<String, Object> configProperties = new HashMap<>();
+        configProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configProperties);
+    }
+
 }

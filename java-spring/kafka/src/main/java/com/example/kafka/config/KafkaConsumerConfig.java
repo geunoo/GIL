@@ -23,57 +23,46 @@ public class KafkaConsumerConfig {
     @Value(value = "${kafka.bootstrap-servers}")
     private String bootstrapServers;
 
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, User> userContainerFactory() {
+        return createContainerFactory(User.class);
+    }
 
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Feed> feedContainerFactory() {
+        return createContainerFactory(Feed.class);
+    }
 
-    public ConsumerFactory<String, User> userConsumerFactory() {
-        JsonDeserializer<User> deserializer = new JsonDeserializer<>(User.class);
-        deserializer.setRemoveTypeHeaders(false);
-        deserializer.addTrustedPackages("*");
-        deserializer.setUseTypeMapperForKey(true);
+    private <T> ConcurrentKafkaListenerContainerFactory<String, T> createContainerFactory(Class<T> type) {
+        ConcurrentKafkaListenerContainerFactory<String, T> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(createKafkaConsumerFactory(type));
+        return factory;
+    }
 
+    private <T> DefaultKafkaConsumerFactory<String, T> createKafkaConsumerFactory(Class<T> type) {
+        JsonDeserializer<T> deserializer = createJsonDeserializer(type);
+        return new DefaultKafkaConsumerFactory<>(
+                createConsumerProps(deserializer.getClass()),
+                new StringDeserializer(),
+                deserializer
+        );
+    }
+
+    private <T> Map<String, Object> createConsumerProps(Class<T> deserializerType) {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "foo");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
-
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), deserializer);
-
-//        Map<String, Object> config = new HashMap<>();
-//        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-//        config.put(ConsumerConfig.GROUP_ID_CONFIG, "foo");
-//
-//        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(User.class));
-
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializerType);
+        return props;
     }
 
-    @Bean
-    public ConsumerFactory<String, Feed> feedConsumerFactory() {
-        JsonDeserializer<Feed> deserializer = new JsonDeserializer<>(Feed.class);
+    private <T> JsonDeserializer<T> createJsonDeserializer(Class<T> deserializedType) {
+        JsonDeserializer<T> deserializer = new JsonDeserializer<>(deserializedType);
         deserializer.setRemoveTypeHeaders(false);
         deserializer.addTrustedPackages("*");
         deserializer.setUseTypeMapperForKey(true);
-
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "bar");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
-
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), deserializer);
-
-//        Map<String, Object> config = new HashMap<>();
-//        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-//        config.put(ConsumerConfig.GROUP_ID_CONFIG, "foo");
-//
-//        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(User.class));
-
+        return deserializer;
     }
 
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, User> userKafkaListener() {
-        ConcurrentKafkaListenerContainerFactory<String, User> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(userConsumerFactory());
-        return factory;
-    }
 }

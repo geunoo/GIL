@@ -1,6 +1,5 @@
 package com.example.kafka.consumer;
 
-import com.example.kafka.JsonConverter;
 import com.example.kafka.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -10,11 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserConsumer {
 
-    private final JsonConverter<User> jsonConverter;
-
-    @KafkaListener(topics = "user", groupId = "foo")
-    public void consume(String userString) {
-        User user = jsonConverter.convert(userString, User.class);
+    @KafkaListener(topics = "user", groupId = "foo", containerFactory = "userContainerFactory")
+    public void consume(User user) {
         System.out.println(user.toString());
+        System.out.println(user.getName());
     }
 }
