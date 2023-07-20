@@ -1,4 +1,4 @@
-package com.example.kafka;
+package com.example.kafka.controller.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

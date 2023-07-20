@@ -1,5 +1,7 @@
-package com.example.kafka;
+package com.example.kafka.controller;
 
+import com.example.kafka.controller.dto.FeedRequest;
+import com.example.kafka.controller.dto.UserRequest;
 import com.example.kafka.domain.Feed;
 import com.example.kafka.domain.User;
 import com.example.kafka.producer.FeedProducer;
