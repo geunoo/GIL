@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
@@ -23,16 +22,11 @@ public class KafkaProducerConfig {
 
 
     @Bean
-    public KafkaTemplate<String, User> userKafkaTemplate() {
-        return new KafkaTemplate<>(createProducerFactory(User.class));
+    public KafkaTemplate<String, ?> kafkaTemplate() {
+        return new KafkaTemplate<>(createProducerFactory());
     }
 
-    @Bean
-    public KafkaTemplate<String, Feed> feedKafkaTemplate() {
-        return new KafkaTemplate<>(createProducerFactory(Feed.class));
-    }
-
-    private <T> DefaultKafkaProducerFactory<String, T> createProducerFactory(Class<T> type) {
+    private DefaultKafkaProducerFactory<String, ?> createProducerFactory() {
         Map<String, Object> configProperties = new HashMap<>();
         configProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
