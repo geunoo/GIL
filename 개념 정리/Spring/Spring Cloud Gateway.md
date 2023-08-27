@@ -10,7 +10,7 @@ Spring Cloud Gateway는 Spring에서 구축할수 있는 api 게이트웨이이�
 
 ## 작동 원리
 
-![Untitled](https://github.com/gilgeunwoo/GIL/assets/103028187/0fa3cf9a-fac7-4d65-bef8-413623364210)
+![image](https://github.com/gilgeunwoo/GIL/assets/103028187/4978f8b0-7f99-435f-8654-9d6553e70937)
 
 우선 클라이언트가 gateway server에 요청을 보내면, 
 
