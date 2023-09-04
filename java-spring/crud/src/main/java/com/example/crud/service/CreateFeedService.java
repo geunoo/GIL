@@ -27,6 +27,11 @@ public class CreateFeedService {
                 .build();
 
         feedRepository.save(feed);
+
+        if (feed.getContent().length() == 10) {
+            throw new RuntimeException();
+        }
+
         eventPublisher.publishEvent(feed);
 
         return List.of(feed);

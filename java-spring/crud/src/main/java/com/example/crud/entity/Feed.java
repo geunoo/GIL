@@ -1,5 +1,6 @@
 package com.example.crud.entity;
 
+import com.example.crud.event.FeedEntityListener;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(value = FeedEntityListener.class)
 @Entity
 public class Feed {
 
