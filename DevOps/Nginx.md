@@ -49,4 +49,4 @@ work process는 계속 한 커넥션만 붙잡고 있지 않고,
 
 만약 요청이 오래걸린다면, worker process는 스레드풀을 만들어 요청을 따로 처리한다.
 
-worker process는 주로 cpu 코어수 만큼 만들기 때문에, context switching이 잘 일어나지 않아, cpu의 부하를 줄일 수 있다.
+worker process는 주로 cpu 코어수 만큼 만들기 때문에, context switching이 잘 일어나지 않아 cpu의 부하를 줄일 수 있다.
